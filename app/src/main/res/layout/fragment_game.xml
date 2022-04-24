@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.projet_coditty_goubin.viewModel.GameViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorFondGame">
+
+
+        <ImageView
+            android:id="@+id/temperature"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:elevation="15dp"
+            android:src="@mipmap/ic_temperature"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fonte"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="8dp"
+            android:elevation="15dp"
+            android:src="@mipmap/ic_fonte"
+            app:layout_constraintStart_toStartOf="@id/temperature"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/health"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="8dp"
+            android:elevation="15dp"
+            android:src="@mipmap/ic_health"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/death"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="8dp"
+            android:elevation="15dp"
+            android:src="@mipmap/ic_death"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textTemperature"
+            android:layout_width="75dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textFonte"
+            android:layout_width="75dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textHealth"
+            android:layout_width="75dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="182dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textDeath"
+            android:layout_width="75dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="272dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/test2"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTemperature" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/beige"
+            android:paddingTop="10dp"
+            app:cardBackgroundColor="@color/beige"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp">
+
+            <TextView
+                android:id="@+id/cardText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/test"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/card" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/card" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_valider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
+            app:layout_constraintRight_toRightOf="@id/tv_guideline2"
+            app:layout_constraintTop_toBottomOf="@id/bt_yes" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_quitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
+            app:layout_constraintRight_toRightOf="@id/tv_guideline2"
+            app:layout_constraintTop_toBottomOf="@id/bt_yes" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/test2"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bt_no" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2sp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tv_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2sp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

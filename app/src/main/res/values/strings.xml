@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Projet_Coditty_Goubin</string>
+    <string name="bienvenue">Bienvenue sur notre jeu !</string>
+    <string name="validate">Suivant</string>
+    <string name="play">Jouer</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="bestScore">Meilleurs scores</string>
+    <string name="man">Homme</string>
+    <string name="woman">Femme</string>
+    <string name="oui">Oui</string>
+    <string name="non">Non</string>
+    <string name="quitter">Quitter</string>
+    <string name="score">Votre score actuel : </string>
+    <string name="scoreFinal">Votre score : </string>
+    <string name="initialiser">Appuyez sur le bouton Suivant quand vous êtes prêt à jouer ! </string>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/accueilFragment">
+    <fragment
+        android:id="@+id/accueilFragment"
+        android:name="com.example.projet_coditty_goubin.fragment.AccueilFragment"
+        android:label="AccueilFragment" >
+        <action
+            android:id="@+id/action_accueilFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_accueilFragment_to_listUserFragment"
+            app:destination="@id/listUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.projet_coditty_goubin.fragment.GameFragment"
+        android:label="GameFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.example.projet_coditty_goubin.model.User" />
+        <action
+            android:id="@+id/action_gameFragment_to_accueilFragment"
+            app:destination="@id/accueilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listUserFragment"
+        android:name="com.example.projet_coditty_goubin.fragment.ListUserFragment"
+        android:label="ListUserFragment" />
+</navigation>

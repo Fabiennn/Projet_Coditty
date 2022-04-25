@@ -9,11 +9,10 @@ import com.example.projet_coditty_goubin.databinding.ItemViewBinding
 import com.example.projet_coditty_goubin.model.User
 
 
-class UserAdapter(val clickListener : UserListener) : ListAdapter<User, UserAdapter.ViewHolder>(UserDiffCallback()) {
+class UserAdapter(val clickListener: UserListener) :
+    ListAdapter<User, UserAdapter.ViewHolder>(UserDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val item = getItem(position)
-//        holder.bind(item)
         holder.bind(getItem(position)!!, clickListener)
 
     }
@@ -22,9 +21,10 @@ class UserAdapter(val clickListener : UserListener) : ListAdapter<User, UserAdap
         return UserAdapter.ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(val binding: ItemViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: User, clickListener : UserListener) {
+        fun bind(item: User, clickListener: UserListener) {
             binding.user = item
             binding.clickListener = clickListener
             binding.executePendingBindings()

@@ -12,12 +12,13 @@ import com.example.projet_coditty_goubin.database.UserDao
 import com.example.projet_coditty_goubin.model.Card
 import com.example.projet_coditty_goubin.model.Explication
 import com.example.projet_coditty_goubin.model.User
-import kotlinx.coroutines.*
-import okhttp3.Dispatcher
-import java.lang.Exception
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-class GameViewModel (
+class GameViewModel(
     val database: CardDao,
     val databaseUser: UserDao,
     val databaseExplication: ExplicationDao,
@@ -54,7 +55,6 @@ class GameViewModel (
     private var score = 0
 
 
-
     init {
         Log.i("GameViewModel", "created")
         initializeCard()
@@ -69,7 +69,7 @@ class GameViewModel (
                 for (i in 0..listResult.size) {
                     database.insert(listResult[i])
                 }
-            } catch (e : Exception) {
+            } catch (e: Exception) {
 
             }
         }
@@ -78,14 +78,15 @@ class GameViewModel (
 
     fun getNextCard(): Card? {
         if (listCardId.size == 10) {
-            _card.value!!.description = "C'est la fin du jeu ! J'espère que ça vous aura plu et que vous aurez appris des choses"
+            _card.value!!.description =
+                "C'est la fin du jeu ! J'espère que ça vous aura plu et que vous aurez appris des choses"
         } else {
             _card.value = database.getRandomNotIn(listCardId)
         }
         return _card.value
     }
 
-    fun getExplication() : String? {
+    fun getExplication(): String? {
         if (listCardId.size == 10) {
             return "C'est la fin du jeu ! J'espère que ça vous aura plu et que vous aurez appris des choses"
         }
@@ -94,10 +95,22 @@ class GameViewModel (
     }
 
     fun initializeExplication() {
-        var explication1 = Explication(explicationId, "Vous etes le roi du royaume, une terrible crise environnementale s'est abattue sur le pays, seul vous êtes en mesure de sauver le monde")
-        var explication2 = Explication(2L, "Vous allez avoir tout un tas de décisions à prendre (10 au total) parmis de nombreuses possibles. Vos décisions affecteront 4 critères représentés juste au dessus.")
-        var explication3 = Explication(3L, "Vous etes le roi du royaume")
-        var explication4 = Explication(4L, "Vous etes le roi du royfghaume")
+        var explication1 = Explication(
+            explicationId,
+            "Vous êtes le roi du royaume, une terrible crise environnementale s'est abattue sur le pays, seul vous êtes en mesure de pouvoir sauver le monde."
+        )
+        var explication2 = Explication(
+            2L,
+            "Vous allez avoir tout un tas de décisions à prendre, 10 au total. Vos décisions affecteront 4 critères représentés juste au dessus. Dans l'ordre il y a la température de la terre, le pourcentage de fonte des glaces, la santé génrale de la Terre, et le nombre de morts"
+        )
+        var explication3 = Explication(
+            3L,
+            "Chaque question sera suivi d'une explication sur la situation actuelle, dans le but de faire connaître des informations importantes sur notre monde"
+        )
+        var explication4 = Explication(
+            4L,
+            "Vous êtes prêt ? Alors c'est parti, amusez-vous et bonne chance surtout !"
+        )
         databaseExplication.insert(explication1)
         databaseExplication.insert(explication2)
         databaseExplication.insert(explication3)
@@ -105,8 +118,8 @@ class GameViewModel (
     }
 
 
-    fun getNextExplication() : Explication? {
-        if (explicationId == 4L) {
+    fun getNextExplication(): Explication? {
+        if (explicationId == 5L) {
             getNextCard()
             return null
         } else {
@@ -116,11 +129,11 @@ class GameViewModel (
         }
     }
 
-    fun getGiveExplication() : Boolean {
+    fun getGiveExplication(): Boolean {
         return giveExplication
     }
 
-    fun setGiveExplication(value : Boolean) {
+    fun setGiveExplication(value: Boolean) {
         giveExplication = value
     }
 
@@ -144,23 +157,7 @@ class GameViewModel (
         return user.score
     }
 
-    fun setFonte(value: Float) {
-        valueFonte = value
-    }
-
-    fun setDeath(value: Int) {
-        valueDeath = value
-    }
-
-    fun setTemperature(value: Float) {
-        valueTemperature = value
-    }
-
-    fun setHealth(value: Float) {
-        valueHealth = value
-    }
-
-    fun getListSize() : Int {
+    fun getListSize(): Int {
         return listCardId.size
     }
 
@@ -172,32 +169,31 @@ class GameViewModel (
         }
     }
 
-    fun applyScore(case : Boolean) {
+    fun applyScore(case: Boolean) {
         if (case == true) {
-            // apply yes
+            // apply case yes
             valueFonte += card.value!!.yesFonte
             valueHealth += card.value!!.yesHealth
             valueTemperature -= card.value!!.yesTemperature
             valueDeath += card.value!!.yesDeath
         } else {
-            // apply false
+            // apply case no
             valueFonte += card.value!!.noFonte
             valueHealth -= card.value!!.noHealth
             valueTemperature += card.value!!.noTemperature
             valueDeath += card.value!!.noDeath
         }
-        user.score = (valueHealth + valueFonte + valueTemperature - valueDeath/1000).roundToInt()
+        user.score = (valueHealth + valueFonte + valueTemperature - valueDeath / 1000).roundToInt() // calculate score
         uiScope.launch {
             var getPropertiesDeferred =
-                user?.let { MyApi.retrofitService.createUser(it) }
+                user.let { MyApi.retrofitService.createUser(it) }
             try {
-                getPropertiesDeferred?.await()
+                getPropertiesDeferred.await()
             } catch (e: Exception) {
                 print(e.message)
             }
         }
     }
-
 
 
 }

@@ -13,7 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 
-private const val BASE_URL = "http://10.0.2.2:8080"
+private const val BASE_URL = "https://projetcoditty.herokuapp.com"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -27,13 +27,13 @@ private val retrofit = Retrofit.Builder()
 
 interface MyApiService {
     @GET("/card/getCards")
-    fun getCards() : Deferred<List<Card>>
+    fun getCards(): Deferred<List<Card>>
 
     @POST("/user/create")
-    fun createUser(@Body user: User) : Deferred<User>
+    fun createUser(@Body user: User): Deferred<User>
 
     @GET("/user/getUsers")
-    fun getUsers() : Deferred<List<User>>
+    fun getUsers(): Deferred<List<User>>
 
 }
 

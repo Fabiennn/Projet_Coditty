@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.projet_coditty_goubin.database.UserDao
 import com.example.projet_coditty_goubin.viewModel.AccueilViewModel
 
-class AccueilViewModelFactory (
+class AccueilViewModelFactory(
     private val dataSource: UserDao,
     private val application: Application,
     private val userID: Long = 0L // userID
@@ -14,7 +14,7 @@ class AccueilViewModelFactory (
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AccueilViewModel::class.java)) {
-            return AccueilViewModel(dataSource, application,userID) as T //
+            return AccueilViewModel(dataSource, application, userID) as T //
             userID
         }
         throw IllegalArgumentException("Unknown ViewModel class")

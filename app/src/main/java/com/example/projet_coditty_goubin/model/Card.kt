@@ -12,7 +12,7 @@ import com.example.projet_coditty_goubin.BR
 
 @Keep
 @Entity(tableName = "card")
-data class Card (
+data class Card(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private var _id: Long = 0L,
@@ -59,70 +59,70 @@ data class Card (
             notifyPropertyChanged(BR.id)
         }
 
-    var description:  String?
+    var description: String?
         @Bindable get() = _description
         set(value) {
             _description = value
             notifyPropertyChanged(BR.description)
         }
 
-    var pathImage:  String?
+    var pathImage: String?
         @Bindable get() = _pathImage
         set(value) {
             _pathImage = value
             notifyPropertyChanged(BR.pathImage)
         }
 
-    var yesHealth:  Float
+    var yesHealth: Float
         @Bindable get() = _yesHealth
         set(value) {
             _yesHealth = value
             notifyPropertyChanged(BR.yesHealth)
         }
 
-    var noHealth:  Float
+    var noHealth: Float
         @Bindable get() = _noHealth
         set(value) {
             _noHealth = value
             notifyPropertyChanged(BR.noHealth)
         }
 
-    var yesFonte:  Float
+    var yesFonte: Float
         @Bindable get() = _yesFonte
         set(value) {
             _yesFonte = value
             notifyPropertyChanged(BR.yesFonte)
         }
 
-    var noFonte:  Float
+    var noFonte: Float
         @Bindable get() = _noFonte
         set(value) {
             _noFonte = value
             notifyPropertyChanged(BR.noFonte)
         }
 
-    var yesDeath:  Int
+    var yesDeath: Int
         @Bindable get() = _yesDeath
         set(value) {
             _yesDeath = value
             notifyPropertyChanged(BR.yesDeath)
         }
 
-    var noDeath:  Int
+    var noDeath: Int
         @Bindable get() = _noDeath
         set(value) {
             _noDeath = value
             notifyPropertyChanged(BR.noDeath)
         }
 
-    var yesTemperature:  Float
+    var yesTemperature: Float
         @Bindable get() = _yesTemperature
         set(value) {
             _yesTemperature = value
             notifyPropertyChanged(BR.yesTemperature)
         }
 
-    var noTemperature:  Float
+    var noTemperature: Float
         @Bindable get() = _noTemperature
         set(value) {
             _noTemperature = value
@@ -149,8 +149,7 @@ data class Card (
         parcel.readInt(),
         parcel.readInt(),
         parcel.readString(),
-        ) {
-    }
+    )
 
     override fun describeContents(): Int {
         return 0

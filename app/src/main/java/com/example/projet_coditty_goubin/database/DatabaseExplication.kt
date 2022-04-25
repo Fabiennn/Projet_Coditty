@@ -9,7 +9,7 @@ import com.example.projet_coditty_goubin.model.Explication
 @Database(entities = [Explication::class], version = 2, exportSchema = false)
 abstract class DatabaseExplication : RoomDatabase() {
 
-    abstract val explicationDao : ExplicationDao
+    abstract val explicationDao: ExplicationDao
 
 
     companion object {

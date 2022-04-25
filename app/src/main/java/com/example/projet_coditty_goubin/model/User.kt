@@ -57,7 +57,8 @@ data class User(
         parcel.readString(),
         parcel.readInt(),
         parcel.readString(),
-        )
+    )
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
         parcel.writeString(pseudo)
@@ -78,4 +79,4 @@ data class User(
             return arrayOfNulls(size)
         }
     }
-    }
+}

@@ -25,7 +25,7 @@ class AccueilViewModel(
         get() = _user
 
     private val statusMessage = MutableLiveData<Event<String>>()
-    val message : LiveData<Event<String>>
+    val message: LiveData<Event<String>>
         get() = statusMessage
 
     private val _changeGender = MutableLiveData<String>()
@@ -47,6 +47,7 @@ class AccueilViewModel(
             _user.value = getUserFromDatabase()
         }
     }
+
     private suspend fun getUserFromDatabase(): User? {
         return withContext(Dispatchers.IO) {
             var user = database.get(userID) // userID
@@ -54,25 +55,6 @@ class AccueilViewModel(
                 user = User()
             }
             user
-        }
-    }
-
-    private suspend fun insert(user: User): Long {
-        var id = 0L
-        withContext(Dispatchers.IO) {
-            id = database.insert(user)
-        }
-        return id
-    }
-
-    private suspend fun update(user: User) {
-        withContext(Dispatchers.IO) {
-            database.update(user)
-        }
-    }
-    private suspend fun get(id: Long) {
-        withContext(Dispatchers.IO) {
-            database.get(id)
         }
     }
 
@@ -84,21 +66,23 @@ class AccueilViewModel(
     fun validate() {
         uiScope.launch {
             val user = user.value ?: return@launch
-            if(user.pseudo.isNullOrEmpty()) {
+            if (user.pseudo.isNullOrEmpty()) {
                 statusMessage.value = Event("Vous devez indiquer un pseudo")
                 return@launch
             }
-            if(user.genre.isNullOrEmpty()) {
+            if (user.genre.isNullOrEmpty()) {
                 statusMessage.value = Event("Vous devez selectionner un genre")
                 return@launch
             }
             var getPropertiesDeferred =
-                user?.let { MyApi.retrofitService.createUser(it) }
+                user.let { MyApi.retrofitService.createUser(it) }
             try {
-                var userCreated  = getPropertiesDeferred?.await()
+                var userCreated = getPropertiesDeferred.await()
                 //database.insert(userCreated)
                 _navigateToAccueil.value = userCreated
             } catch (e: Exception) {
+                if (database.getUsers().isEmpty()) statusMessage.value =
+                    Event("Vous n'êtes pas connecté à l'API, ou cette dernière est en train de se lancer")
                 print(e.message)
             }
         }

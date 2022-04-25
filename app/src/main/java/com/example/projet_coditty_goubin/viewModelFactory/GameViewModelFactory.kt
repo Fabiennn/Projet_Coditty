@@ -9,7 +9,7 @@ import com.example.projet_coditty_goubin.database.UserDao
 import com.example.projet_coditty_goubin.model.User
 import com.example.projet_coditty_goubin.viewModel.GameViewModel
 
-class GameViewModelFactory (
+class GameViewModelFactory(
     private val dataSource: CardDao,
     private val dataSource2: UserDao,
     private val dataSource3: ExplicationDao,

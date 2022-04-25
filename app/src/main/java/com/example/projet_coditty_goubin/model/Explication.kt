@@ -13,7 +13,7 @@ import com.example.projet_coditty_goubin.BR
 
 @Keep
 @Entity(tableName = "explication")
-data class Explication (
+data class Explication(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -41,8 +41,7 @@ data class Explication (
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun describeContents(): Int {
         return 0

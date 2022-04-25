@@ -37,14 +37,15 @@ class GameFragment : Fragment() {
         val dataSource = DatabaseUser.getInstance(application).userDao
         val dataSource2 = DatabaseCard.getInstance(application).cardDao
         val dataSource3 = DatabaseExplication.getInstance(application).explicationDao
-        val viewModelFactory = GameViewModelFactory(dataSource2, dataSource, dataSource3, args.user, application)
+        val viewModelFactory =
+            GameViewModelFactory(dataSource2, dataSource, dataSource3, args.user, application)
 
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_game,
             container, false
         )
 
-        viewModel = ViewModelProvider(this,viewModelFactory).get(GameViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(GameViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.apply {
@@ -77,7 +78,8 @@ class GameFragment : Fragment() {
 
         binding.btQuitter.setOnClickListener {
             viewModel.deleteData()
-            this.findNavController().navigate(GameFragmentDirections.actionGameFragmentToAccueilFragment())
+            this.findNavController()
+                .navigate(GameFragmentDirections.actionGameFragmentToAccueilFragment())
         }
 
         binding.btValider.setOnClickListener {
@@ -102,22 +104,20 @@ class GameFragment : Fragment() {
     private fun boucleJeuYes() {
         if (viewModel.getGiveExplication()) {
             viewModel.applyScore(true)
-            if (viewModel.getListSize() != 10 )  updateScore()
+            if (viewModel.getListSize() != 10) updateScore()
             else afficherQuitter()
             nextExplication()
-        }
-        else nextCard()
+        } else nextCard()
     }
 
 
     private fun boucleJeuNo() {
         if (viewModel.getGiveExplication()) {
             viewModel.applyScore(false)
-            if (viewModel.getListSize() != 10 ) updateScore()
+            if (viewModel.getListSize() != 10) updateScore()
             else afficherQuitter()
             nextExplication()
-        }
-        else nextCard()
+        } else nextCard()
     }
 
     private fun nextExplication() {
@@ -134,14 +134,14 @@ class GameFragment : Fragment() {
 
     private fun boucleExplication() {
         var explication = viewModel.getNextExplication()
-        if (explication != null) binding.cardText.text = explication!!.description
+        if (explication != null) binding.cardText.text = explication.description
     }
 
     private fun updateScore() {
-        binding.textDeath.text = viewModel!!.getDeath().toString()
-        binding.textTemperature.text = viewModel!!.getTemperature().toString() + "°C"
-        binding.textHealth.text = viewModel!!.getHealth().toString() + "%"
-        binding.textFonte.text = viewModel!!.getFonte().toString() + "%"
+        binding.textDeath.text = viewModel.getDeath().toString()
+        binding.textTemperature.text = viewModel.getTemperature().toString() + "°C"
+        binding.textHealth.text = viewModel.getHealth().toString() + "%"
+        binding.textFonte.text = viewModel.getFonte().toString() + "%"
         binding.score.text = getString(R.string.score) + viewModel.getScore().toString()
     }
 
@@ -161,18 +161,15 @@ class GameFragment : Fragment() {
 
         @JvmStatic
         @BindingAdapter("pseudo")
-        fun TextView.setPseudo(item : User) {
+        fun TextView.setPseudo(item: User) {
             text = item.pseudo
         }
 
         @JvmStatic
         @BindingAdapter("score")
-        fun TextView.setScore(item : User) {
+        fun TextView.setScore(item: User) {
             text = item.score.toString()
         }
-
-
-
 
 
     }

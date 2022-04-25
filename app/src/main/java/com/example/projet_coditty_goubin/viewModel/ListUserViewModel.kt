@@ -9,7 +9,10 @@ import com.example.projet_coditty_goubin.api.MyApi
 import com.example.projet_coditty_goubin.database.UserDao
 import com.example.projet_coditty_goubin.event.Event
 import com.example.projet_coditty_goubin.model.User
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ListUserViewModel(
     val database: UserDao,
@@ -27,22 +30,17 @@ class ListUserViewModel(
     val response: LiveData<List<User>>
         get() = _response
 
-    private val _idLocalisation = MutableLiveData<Long>()
-
-    val idLocalisation: LiveData<Long>
-        get() = _idLocalisation
-
     private val statusMessage = MutableLiveData<Event<String>>()
 
-    val message : LiveData<Event<String>>
+    val message: LiveData<Event<String>>
         get() = statusMessage
 
     init {
         Log.i("ListLocalisViewModel", "created")
-        initializeLocalisations()
+        initializeUsers()
     }
 
-    private fun initializeLocalisations() {
+    private fun initializeUsers() {
         uiScope.launch {
             var getPropertiesDeferred = MyApi.retrofitService.getUsers()
             try {
@@ -62,14 +60,11 @@ class ListUserViewModel(
 
                 }
             } catch (e: Exception) {
-                 if (database.getUsers().size == 0) statusMessage.value = Event("Vous n'êtes pas connecté à l'API !")
+                if (database.getUsers().isEmpty()) statusMessage.value =
+                    Event("Vous n'êtes pas connecté à l'API !")
                 _response.value = ArrayList()
             }
         }
-    }
-
-    fun doneNavigating() {
-        _idLocalisation.value = null
     }
 
     override fun onCleared() {

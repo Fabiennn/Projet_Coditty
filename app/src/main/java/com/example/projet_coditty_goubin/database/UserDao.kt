@@ -8,14 +8,19 @@ interface UserDao {
 
     @Insert
     fun insert(user: User): Long
+
     @Delete
     fun delete(user: User)
+
     @Update
     fun update(user: User)
+
     @Query("SELECT * from user WHERE id = :key")
     fun get(key: Long): User?
+
     @Query("DELETE FROM user")
     fun deleteData()
+
     @Query("SELECT * FROM user ORDER BY score DESC")
-    fun getUsers() : List<User>
+    fun getUsers(): List<User>
 }

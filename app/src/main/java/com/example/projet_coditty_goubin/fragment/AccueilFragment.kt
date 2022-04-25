@@ -1,12 +1,12 @@
 package com.example.projet_coditty_goubin.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -34,7 +34,7 @@ class AccueilFragment : Fragment() {
             container, false
         )
 
-        viewModel = ViewModelProvider(this,viewModelFactory).get(AccueilViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(AccueilViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.apply {
@@ -62,12 +62,12 @@ class AccueilFragment : Fragment() {
             )
         }
 
-        viewModel.navigateToAccueil.observe(viewLifecycleOwner, Observer {
-                user ->
+        viewModel.navigateToAccueil.observe(viewLifecycleOwner, Observer { user ->
             user?.let {
                 this.findNavController().navigate(
                     AccueilFragmentDirections
-                        .actionAccueilFragmentToGameFragment(user))
+                        .actionAccueilFragmentToGameFragment(user)
+                )
                 viewModel.doneNavigating()
             }
         })
@@ -76,7 +76,7 @@ class AccueilFragment : Fragment() {
 
     }
 
-    fun setPictureGender(gender : String) {
+    fun setPictureGender(gender: String) {
         if (gender == "Homme") binding.personnage.setImageResource(R.mipmap.roi)
         else binding.personnage.setImageResource(R.mipmap.reine)
     }
